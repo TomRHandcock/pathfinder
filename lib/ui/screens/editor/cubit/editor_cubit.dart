@@ -10,8 +10,8 @@ class EditorCubit extends Cubit<EditorState> {
           const EditorState(
             graph: Graph(
               nodes: [
-                Node(id: 0, xPosition: 100, yPosition: 100, label: "Node 1"),
-                Node(id: 1, xPosition: 100, yPosition: 200, label: "Node 2"),
+                Node(id: 0, xPosition: 100, yPosition: 100, label: "Node 0"),
+                Node(id: 1, xPosition: 100, yPosition: 200, label: "Node 1"),
               ],
               edges: [
                 Edge(startId: 0, endId: 1),
