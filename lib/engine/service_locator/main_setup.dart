@@ -7,8 +7,8 @@ part 'service_setup.dart';
 
 final _getIt = GetIt.I;
 
-setupDependencies() async {
-  _setupServices();
+Future<void> setupDependencies() async {
+  await _setupServices();
   _setupRepositories();
   _setupUseCases();
   _setupCubits();
