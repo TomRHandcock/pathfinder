@@ -80,7 +80,7 @@ class _EdgePainter extends CustomPainter {
   _EdgePainter(this.startTangent, this.endTangent);
 
   static final linePaint = Paint()
-    ..color = Colors.blueGrey
+    ..color = Colors.white
     ..strokeWidth = 2
     ..style = PaintingStyle.stroke;
 
