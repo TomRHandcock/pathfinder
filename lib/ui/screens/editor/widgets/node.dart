@@ -19,7 +19,7 @@ class NodeWidget extends StatelessWidget {
           color: Colors.lightBlue,
         ),
         padding: const EdgeInsets.all(16),
-        child: Text("Node ${node.id}: ${node.label}"),
+        child: Text("Node ${node.id}: ${node.id}"),
       ),
     ]
     );
