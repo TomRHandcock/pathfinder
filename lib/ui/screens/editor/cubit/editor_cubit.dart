@@ -16,7 +16,7 @@ class EditorCubit extends Cubit<EditorState> {
                 Node(id: 1, position: Offset(100, 200), label: "Node 1"),
               ],
               edges: [
-                Edge(id: 0, startId: 0, startSide: 0.5, endId: 1, endSide: 0.5),
+                Edge(id: 0, startNode: 0, startSide: 0.5, endNode: 1, endSide: 0.5),
               ],
             ),
           ),

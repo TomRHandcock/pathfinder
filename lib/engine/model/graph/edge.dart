@@ -6,9 +6,9 @@ part 'edge.freezed.dart';
 class Edge with _$Edge {
   const factory Edge({
     required int id,
-    required int startId,
+    required int startNode,
     required double startSide,
-    required int endId,
+    required int endNode,
     required double endSide,
   }) = _Edge;
 }

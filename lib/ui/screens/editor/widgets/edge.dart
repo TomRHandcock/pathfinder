@@ -24,34 +24,51 @@ class EdgeWidget extends StatelessWidget {
     required this.controller,
   });
 
+  static Tangent? getPerimeterPosition(SizedNode sizedNode, double perimeter) {
+    final node = sizedNode.node;
+    final size = sizedNode.size;
+    final path = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          node.position.dx,
+          node.position.dy,
+          size.width,
+          size.height,
+        ),
+        const Radius.circular(16),
+      ));
+    final metrics = path.computeMetrics();
+    final metric = metrics.elementAt(0);
+    final offset = metric.length * perimeter;
+    return metric.getTangentForOffset(offset);
+  }
+
   SizedNode? get startNode => controller.nodeSizes
-      .firstWhereOrNull((node) => node.node.id == edge.startId);
+      .firstWhereOrNull((node) => node.node.id == edge.startNode);
 
   SizedNode? get endNode => controller.nodeSizes
-      .firstWhereOrNull((node) => node.node.id == edge.endId);
+      .firstWhereOrNull((node) => node.node.id == edge.endNode);
 
   @override
   Widget build(BuildContext context) {
     final localStart = startNode;
     final localEnd = endNode;
-    if (localStart == null || localEnd == null) {
-      return Container();
+    if(localStart == null) {
+      throw StateError("Couldn't find node with ID: ${edge.startNode}");
     }
-    final startTan = EditorCanvasLayoutDelegate.getPerimeterPosition(
-      localStart.node.position,
-      localStart.size,
-      edge.startSide,
-    );
-    final endTan = EditorCanvasLayoutDelegate.getPerimeterPosition(
-      localEnd.node.position,
-      localEnd.size,
-      edge.endSide,
-    );
-    if (startTan == null || endTan == null) {
-      return Container();
+    if(localEnd == null) {
+      throw StateError("Couldn't find node with ID: ${edge.endNode}");
+    }
+    final startTangent = getPerimeterPosition(localStart, edge.startSide);
+    final endTangent = getPerimeterPosition(localEnd, edge.endSide);
+    if(startTangent == null) {
+      throw StateError("Couldn't find tangent at point ${edge.startSide} on node with ID: ${edge.startNode}");
+    }
+    if(endTangent == null) {
+      throw StateError("Couldn't find tangent at point ${edge.endSide} on node with ID: ${edge.endNode}");
     }
     return CustomPaint(
-      painter: _EdgePainter(startTan, endTan),
+      painter: _EdgePainter(startTangent, endTangent),
     );
   }
 }
@@ -71,10 +88,12 @@ class _EdgePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final startNormal =
         vector.Vector2(startTangent.vector.dy, -startTangent.vector.dx)
-            .normalized() * 50;
+                .normalized() *
+            50;
     final endNormal =
         vector.Vector2(endTangent.vector.dy, -endTangent.vector.dx)
-            .normalized() * 50;
+                .normalized() *
+            50;
     final path = Path()
       ..addPolygon([startTangent.position], false)
       ..cubicTo(

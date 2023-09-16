@@ -48,10 +48,10 @@ class _EditorCanvasState extends State<EditorCanvas> {
           widget.graph.edges.map((edge) {
             return LayoutId(
               id: "edge-${edge.id}",
-              child: EdgeWidget(
+              child: widget.controller.nodeSizes.isNotEmpty ? EdgeWidget(
                 edge: edge,
                 controller: widget.controller,
-              ),
+              ) : Container(),
             );
           }).toList(),
     );
@@ -88,18 +88,6 @@ class EditorCanvasLayoutDelegate extends MultiChildLayoutDelegate {
         const BoxConstraints(),
       );
     }
-  }
-
-  static Tangent? getPerimeterPosition(Offset node, Size size, double perimeter) {
-    final path = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(node.dx, node.dy, size.width, size.height),
-        const Radius.circular(16),
-      ));
-    final metrics = path.computeMetrics();
-    final metric = metrics.elementAt(0);
-    final offset = metric.length * perimeter;
-    return metric.getTangentForOffset(offset);
   }
 
   @override
