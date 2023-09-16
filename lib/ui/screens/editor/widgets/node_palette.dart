@@ -31,11 +31,16 @@ class _NewNodeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: InkWell(
-        onTap: () => onPressed?.call(),
-        child: Icon(
-          Icons.add,
-          color: context.pathfinderTheme.colors.primaryColor,
+      child: Material(
+        borderRadius: BorderRadius.circular(16),
+        color: context.pathfinderTheme.colors.backgroundColor,
+        child: InkWell(
+          splashColor: context.pathfinderTheme.colors.rippleColor,
+          onTap: () => onPressed?.call(),
+          child: Icon(
+            Icons.add,
+            color: context.pathfinderTheme.colors.primaryColor,
+          ),
         ),
       ),
     );

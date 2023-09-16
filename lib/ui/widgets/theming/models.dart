@@ -16,5 +16,6 @@ class PathfinderColors with _$PathfinderColors {
     required Color backgroundColor,
     required Color surfaceColor,
     required Color primaryColor,
+    required Color rippleColor,
   }) = _PathfinderColors;
 }

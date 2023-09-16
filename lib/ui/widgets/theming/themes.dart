@@ -8,6 +8,7 @@ abstract class Themes {
       backgroundColor: Color(0xff0c0c0c),
       surfaceColor: Color(0xff191919),
       primaryColor: Color(0xffefefef),
+      rippleColor: Color(0xaaafafaf),
     ),
   );
 }
