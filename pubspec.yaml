@@ -25,6 +25,7 @@ dependencies:
   # Testing mocks
   mockito: ^5.4.2
   get_it: ^7.6.2
+  vector_math: ^2.1.4
 
 dev_dependencies:
   flutter_test:

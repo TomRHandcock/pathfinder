@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Pathfinder"),
+        title: const Text("Pathfinder"),
       ),
       body: Center(
         child: FilledButton(

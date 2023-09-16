@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:pathfinder/ui/screens/editor/editor_screen.dart';
 import 'package:pathfinder/ui/screens/home/home_screen.dart';
 

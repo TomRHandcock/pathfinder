@@ -15,7 +15,7 @@ class EditorCanvas extends StatefulWidget {
   final Graph graph;
   final GraphController controller;
 
-  EditorCanvas({required this.graph, required this.controller, super.key});
+  const EditorCanvas({required this.graph, required this.controller, super.key});
 
   @override
   State<EditorCanvas> createState() => _EditorCanvasState();

@@ -5,7 +5,7 @@ import 'package:pathfinder/engine/model/graph/edge.dart';
 import 'package:pathfinder/engine/model/graph/node.dart';
 import 'package:pathfinder/engine/util/list_utils.dart';
 import 'package:pathfinder/ui/screens/editor/widgets/editor_canvas.dart';
-import 'package:vector_math/vector_math.dart' as Vector;
+import 'package:vector_math/vector_math.dart' as vector;
 
 class SizedNode {
   final Node node;
@@ -70,10 +70,10 @@ class _EdgePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final startNormal =
-        Vector.Vector2(startTangent.vector.dy, -startTangent.vector.dx)
+        vector.Vector2(startTangent.vector.dy, -startTangent.vector.dx)
             .normalized() * 50;
     final endNormal =
-        Vector.Vector2(endTangent.vector.dy, -endTangent.vector.dx)
+        vector.Vector2(endTangent.vector.dy, -endTangent.vector.dx)
             .normalized() * 50;
     final path = Path()
       ..addPolygon([startTangent.position], false)
