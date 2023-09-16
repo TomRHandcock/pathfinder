@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'node.freezed.dart';
@@ -6,8 +8,7 @@ part 'node.freezed.dart';
 class Node with _$Node {
   const factory Node({
     required int id,
-    required double xPosition,
-    required double yPosition,
+    required Offset position,
     required String label,
   }) = _Node;
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:pathfinder/engine/model/graph/edge.dart';
 import 'package:pathfinder/engine/model/graph/graph.dart';
 import 'package:pathfinder/engine/model/graph/node.dart';
@@ -10,11 +12,11 @@ class EditorCubit extends Cubit<EditorState> {
           const EditorState(
             graph: Graph(
               nodes: [
-                Node(id: 0, xPosition: 100, yPosition: 100, label: "Node 0"),
-                Node(id: 1, xPosition: 100, yPosition: 200, label: "Node 1"),
+                Node(id: 0, position: Offset(100, 100), label: "Node 0"),
+                Node(id: 1, position: Offset(100, 200), label: "Node 1"),
               ],
               edges: [
-                Edge(id: 0, startId: 0, startSide: 0.97, endId: 1, endSide: 0),
+                Edge(id: 0, startId: 0, startSide: 0.5, endId: 1, endSide: 0.5),
               ],
             ),
           ),
