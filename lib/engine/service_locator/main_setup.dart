@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:pathfinder/ui/screens/editor/cubit/editor_cubit.dart';
+import 'package:pathfinder/ui/screens/new_node_template/cubit/new_node_template_cubit.dart';
 
 part 'cubit_setup.dart';
 part 'use_case_setup.dart';
