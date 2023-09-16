@@ -6,6 +6,7 @@ import 'package:pathfinder/ui/screens/editor/cubit/editor_cubit.dart';
 import 'package:pathfinder/ui/screens/editor/cubit/editor_state.dart';
 import 'package:pathfinder/ui/screens/editor/widgets/editor_canvas.dart';
 import 'package:pathfinder/ui/screens/editor/widgets/node_palette.dart';
+import 'package:pathfinder/ui/util/context_utils.dart';
 
 @RoutePage()
 class EditorScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -47,9 +48,12 @@ class _EditorContent extends StatelessWidget {
             child: NodePalette(),
           ),
           Expanded(
-            child: EditorCanvas(
-              graph: state.graph,
-              controller: GraphController(),
+            child: ColoredBox(
+              color: context.pathfinderTheme.colors.surfaceColor,
+              child: EditorCanvas(
+                graph: state.graph,
+                controller: GraphController(),
+              ),
             ),
           ),
         ],
