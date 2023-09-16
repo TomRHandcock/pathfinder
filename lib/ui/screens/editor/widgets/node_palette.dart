@@ -3,7 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
 
 class NodePalette extends StatelessWidget {
-  const NodePalette({super.key});
+  final Function()? onNewNodeTemplatePressed;
+
+  const NodePalette({
+    super.key,
+    this.onNewNodeTemplatePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +17,7 @@ class NodePalette extends StatelessWidget {
       child: ListView(
         children: [
           _NewNodeButton(
-            onPressed: () {
-              // TODO: Implement.
-            },
+            onPressed: () => onNewNodeTemplatePressed?.call(),
           ),
         ],
       ),
