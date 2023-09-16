@@ -34,12 +34,15 @@ class _EditorScreenState extends State<EditorScreen> {
 class _EditorContent extends StatelessWidget {
   final EditorState state;
 
-  const _EditorContent({required this.state, super.key});
+  const _EditorContent({required this.state});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: EditorCanvas(graph: state.graph),
+      body: EditorCanvas(
+        graph: state.graph,
+        controller: GraphController(),
+      ),
     );
   }
 }
