@@ -42,7 +42,7 @@ class _NewNodeButton extends StatelessWidget {
           onTap: () => onPressed?.call(),
           child: Icon(
             Icons.add,
-            color: context.pathfinderTheme.colors.primaryColor,
+            color: context.pathfinderTheme.colors.textColor,
           ),
         ),
       ),

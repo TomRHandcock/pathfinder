@@ -17,11 +17,13 @@ class ItemPalette extends StatelessWidget {
       child: ListView.builder(
         padding: const EdgeInsets.all(4),
         itemBuilder: (BuildContext context, int index) {
-          return const Padding(
-            padding: EdgeInsets.all(4),
+          return Padding(
+            padding: const EdgeInsets.all(4),
             child: AspectRatio(
               aspectRatio: 1,
-              child: ColoredBox(color: Colors.purple),
+              child: ColoredBox(
+                color: context.pathfinderTheme.colors.primaryColor,
+              ),
             ),
           );
         },
