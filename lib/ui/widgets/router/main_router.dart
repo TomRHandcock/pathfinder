@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:pathfinder/ui/screens/editor/canvas/canvas_screen.dart';
+import 'package:pathfinder/ui/screens/editor/new_node_template/new_node_template_screen.dart';
 import 'package:pathfinder/ui/screens/editor/editor_screen.dart';
 import 'package:pathfinder/ui/screens/home/home_screen.dart';
 
@@ -14,6 +16,15 @@ class MainRouter extends _$MainRouter {
         ),
         AutoRoute(
           page: EditorRoute.page,
+          children: [
+            AutoRoute(
+              page: CanvasRoute.page,
+              initial: true,
+            ),
+            AutoRoute(
+              page: NewNodeTemplateRoute.page,
+            ),
+          ],
         ),
       ];
 }

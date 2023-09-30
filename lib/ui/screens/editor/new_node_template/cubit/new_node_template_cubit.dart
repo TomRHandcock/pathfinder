@@ -1,12 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pathfinder/engine/model/graph/node_template.dart';
-import 'package:pathfinder/ui/screens/new_node_template/cubit/new_node_template_state.dart';
+
+import 'new_node_template_state.dart';
 
 class NewNodeTemplateCubit extends Cubit<NewNodeTemplateState> {
   NewNodeTemplateCubit()
       : super(
           const NewNodeTemplateState.ready(
-            values: NewNodeTemplateValues(),
+            values: NewNodeTemplateValues(
+              template: NodeTemplate(
+                name: "Template",
+                item: NodeItem.column(
+                  id: "column",
+                  children: [
+                    NodeItem.text(id: "text", fontSize: 16, inputKey: "name"),
+                  ],
+                ),
+              ),
+            ),
           ),
         );
 

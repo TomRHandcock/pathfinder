@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:pathfinder/engine/model/graph/graph.dart';
-import 'package:pathfinder/ui/screens/editor/widgets/edge.dart';
-import 'package:pathfinder/ui/screens/editor/widgets/node.dart';
+import 'package:pathfinder/ui/screens/editor/canvas/widgets/edge.dart';
+import 'package:pathfinder/ui/screens/editor/canvas/widgets/node.dart';
 
 class GraphController {
   List<SizedNode> nodeSizes = [];

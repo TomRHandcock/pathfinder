@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pathfinder/engine/model/graph/edge.dart';
 import 'package:pathfinder/engine/model/graph/node.dart';
 import 'package:pathfinder/engine/util/list_utils.dart';
-import 'package:pathfinder/ui/screens/editor/widgets/editor_canvas.dart';
 import 'package:vector_math/vector_math.dart' as vector;
+
+import 'editor_canvas.dart';
 
 class SizedNode {
   final Node node;
