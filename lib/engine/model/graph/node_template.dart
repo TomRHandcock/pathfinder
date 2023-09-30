@@ -6,13 +6,18 @@ part 'node_template.freezed.dart';
 class NodeTemplate with _$NodeTemplate {
   const factory NodeTemplate({
     required String name,
-    required NodeItem? item,
+    @Default(NodeItem.container(id: "0", child: null)) NodeItem item,
   }) = _NodeTemplate;
 }
 
 @freezed
 sealed class NodeItem with _$NodeItem {
   const NodeItem._();
+
+  const factory NodeItem.container({
+    required String id,
+    NodeItem? child,
+  }) = NodeItemContainer;
 
   const factory NodeItem.text({
     required String id,
@@ -31,10 +36,11 @@ sealed class NodeItem with _$NodeItem {
   }) = NodeItemRow;
 
   List<String> get inputKeys => switch (this) {
-    NodeItemText(:final inputKey) => [inputKey],
-    NodeItemColumn(:final children) =>
-        children.fold([], (current, node) => current + node.inputKeys),
-    NodeItemRow(:final children) =>
-        children.fold([], (current, node) => current + node.inputKeys),
-  };
+        NodeItemContainer(:final child) => child?.inputKeys ?? [],
+        NodeItemText(:final inputKey) => [inputKey],
+        NodeItemColumn(:final children) =>
+          children.fold([], (current, node) => current + node.inputKeys),
+        NodeItemRow(:final children) =>
+          children.fold([], (current, node) => current + node.inputKeys),
+      };
 }

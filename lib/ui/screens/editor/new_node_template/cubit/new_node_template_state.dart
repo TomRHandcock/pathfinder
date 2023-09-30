@@ -17,7 +17,7 @@ sealed class NewNodeTemplateState with _$NewNodeTemplateState {
 @freezed
 class NewNodeTemplateValues with _$NewNodeTemplateValues {
   const factory NewNodeTemplateValues({
-    @Default(NodeTemplate(name: "", item: null)) NodeTemplate template,
+    @Default(NodeTemplate(name: "")) NodeTemplate template,
     @Default([]) List<String> invalidKeys,
   }) = _NewNodeTemplateValues;
 }

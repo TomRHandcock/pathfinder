@@ -6,8 +6,12 @@ import 'package:pathfinder/engine/model/graph/node_template.dart';
 import 'package:pathfinder/ui/screens/editor/new_node_template/cubit/new_node_template_cubit.dart';
 import 'package:pathfinder/ui/screens/editor/new_node_template/cubit/new_node_template_state.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
+import 'package:pathfinder/ui/widgets/buttons/pathinder_filled_button.dart';
+import 'package:pathfinder/ui/widgets/input/pathfinder_text_field.dart';
 
 part 'widgets/item_palette.dart';
+
+part 'widgets/properties_pane.dart';
 
 @RoutePage()
 class NewNodeTemplateScreen extends StatelessWidget
@@ -62,6 +66,7 @@ class NewNodeTemplateContent extends StatelessWidget {
             color: context.pathfinderTheme.colors.surfaceColor,
           ),
         ),
+        NewNodeTemplatePropertiesPane(template: state.values.template),
       ],
     );
   }
