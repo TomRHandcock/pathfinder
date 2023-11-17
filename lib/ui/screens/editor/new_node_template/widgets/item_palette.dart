@@ -17,17 +17,27 @@ class ItemPalette extends StatelessWidget {
       child: ListView.builder(
         padding: const EdgeInsets.all(4),
         itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(4),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: ColoredBox(
-                color: context.pathfinderTheme.colors.primaryColor,
+          final item = NodePaletteItem.values[index];
+          return Draggable(
+            data: item,
+            feedback: SvgPicture.asset(
+              item.icon,
+            ),
+            child: InkWell(
+              hoverColor: context.pathfinderTheme.colors.textColor,
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: SvgPicture.asset(
+                    item.icon,
+                  ),
+                ),
               ),
             ),
           );
         },
-        itemCount: 10,
+        itemCount: NodePaletteItem.values.length,
       ),
     );
   }
