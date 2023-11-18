@@ -7,6 +7,7 @@ part 'models.freezed.dart';
 class PathfinderTheme with _$PathfinderTheme {
   const factory PathfinderTheme({
     required PathfinderColors colors,
+    required PathfinderInput input,
     required PathfinderText text,
   }) = _PathfinderTheme;
 }
@@ -26,6 +27,14 @@ class PathfinderColors with _$PathfinderColors {
 class PathfinderText with _$PathfinderText {
   const factory PathfinderText({
     required TextStyle heading,
+    required TextStyle bodyLarge,
     required TextStyle body,
   }) = _PathfinderText;
+}
+
+@freezed
+class PathfinderInput with _$PathfinderInput {
+  const factory PathfinderInput({
+    required InputDecoration textfield,
+  }) = _PathfinderInput;
 }

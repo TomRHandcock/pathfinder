@@ -10,10 +10,37 @@ abstract class Themes {
     rippleColor: Color(0xaaafafaf),
   );
 
+  static final defaultInput = PathfinderInput(
+    textfield: InputDecoration(
+
+      border: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: defaultColors.textColor,
+          width: 1,
+        ),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: defaultColors.textColor,
+          width: 1,
+        ),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: defaultColors.primaryColor,
+        ),
+      ),
+    ),
+  );
+
   static final defaultText = PathfinderText(
     heading: TextStyle(
       color: defaultColors.textColor,
       fontSize: 28,
+    ),
+    bodyLarge: TextStyle(
+      color: defaultColors.textColor,
+      fontSize: 18,
     ),
     body: TextStyle(
       color: defaultColors.textColor,
@@ -23,6 +50,7 @@ abstract class Themes {
 
   static final defaultTheme = PathfinderTheme(
     colors: defaultColors,
+    input: defaultInput,
     text: defaultText,
   );
 }
