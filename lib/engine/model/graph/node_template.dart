@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pathfinder/ui/screens/editor/new_node_template/new_node_template_screen.dart';
 
 part 'node_template.freezed.dart';
 

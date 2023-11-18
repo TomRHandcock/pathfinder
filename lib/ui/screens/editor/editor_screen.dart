@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pathfinder/ui/screens/editor/widgets/node_palette.dart';
-import 'package:pathfinder/ui/screens/editor/new_node_template/new_node_template_screen.dart';
 import 'package:pathfinder/ui/widgets/router/main_router.dart';
 
 @RoutePage()

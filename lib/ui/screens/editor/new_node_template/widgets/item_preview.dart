@@ -5,9 +5,7 @@ import 'package:pathfinder/engine/model/graph/node_palette.dart';
 import 'package:pathfinder/engine/model/graph/node_template.dart';
 import 'package:pathfinder/engine/util/object_utils.dart';
 import 'package:pathfinder/ui/screens/editor/new_node_template/cubit/new_node_template_cubit.dart';
-import 'package:pathfinder/ui/screens/editor/new_node_template/new_node_template_screen.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
-import 'package:pathfinder/ui/widgets/theming/models.dart';
 
 class ItemPreview extends StatelessWidget {
   final NodeItem item;
