@@ -13,6 +13,7 @@ import 'package:pathfinder/ui/widgets/buttons/pathinder_filled_button.dart';
 import 'package:pathfinder/ui/widgets/input/pathfinder_text_field.dart';
 
 part 'widgets/item_palette.dart';
+
 part 'widgets/properties_pane.dart';
 
 @RoutePage()
@@ -20,8 +21,8 @@ class NewNodeTemplateScreen extends StatelessWidget
     implements AutoRouteWrapper {
   const NewNodeTemplateScreen({super.key});
 
-  _onItemAdded(BuildContext context, String parentId, NodeItem item) {
-    // context.read<NewNodeTemplateCubit>().addItem(parentId, item);
+  _onItemAdded(BuildContext context, String parentId, NodePaletteItem item) {
+    context.read<NewNodeTemplateCubit>().addItem(parentId, item);
   }
 
   @override
@@ -29,7 +30,7 @@ class NewNodeTemplateScreen extends StatelessWidget
     return BlocBuilder<NewNodeTemplateCubit, NewNodeTemplateState>(
       builder: (BuildContext context, NewNodeTemplateState state) =>
           NewNodeTemplateContent(
-        onItemAdded: (String parentId, NodeItem item) =>
+        onItemAdded: (String parentId, NodePaletteItem item) =>
             _onItemAdded(context, parentId, item),
         state: state,
       ),
@@ -44,7 +45,7 @@ class NewNodeTemplateScreen extends StatelessWidget
 }
 
 class NewNodeTemplateContent extends StatelessWidget {
-  final Function(String parentId, NodeItem item)? onItemAdded;
+  final Function(String parentId, NodePaletteItem item)? onItemAdded;
   final NewNodeTemplateState state;
 
   const NewNodeTemplateContent({
@@ -67,7 +68,10 @@ class NewNodeTemplateContent extends StatelessWidget {
             height: double.infinity,
             color: context.pathfinderTheme.colors.surfaceColor,
             child: Center(
-              child: ItemPreview(item: state.values.template.item),
+              child: ItemPreview(
+                item: state.values.template.item,
+                onItemAdded: onItemAdded,
+              ),
             ),
           ),
         ),

@@ -17,6 +17,10 @@ class NewNodeTemplateCubit extends Cubit<NewNodeTemplateState> {
           ),
         );
 
+  updateName(String name) {
+    emit(state.copyWith.values.template(name: name));
+  }
+
   addItem(String parentId, NodePaletteItem item) {
     final currentTree = state.values.template.item;
     final newItem = createItem(item);

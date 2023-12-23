@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pathfinder/engine/model/graph/node_palette.dart';
 import 'package:pathfinder/engine/model/graph/node_template.dart';
 import 'package:pathfinder/engine/util/object_utils.dart';
-import 'package:pathfinder/ui/screens/editor/new_node_template/cubit/new_node_template_cubit.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
 
 class ItemPreview extends StatelessWidget {
   final NodeItem item;
+  final Function(String parentId, NodePaletteItem item)? onItemAdded;
 
-  const ItemPreview({super.key, required this.item});
+  const ItemPreview({
+    super.key,
+    required this.item,
+    this.onItemAdded,
+  });
 
   @override
   Widget build(BuildContext context) {
     return switch (item) {
       NodeItemContainer() => _Container(
           item: item as NodeItemContainer,
+          onItemAdded: onItemAdded,
         ),
       NodeItemColumn() => _Column(
           item: item as NodeItemColumn,
+          onItemAdded: onItemAdded,
         ),
       NodeItemRow() => _Row(
           item: item as NodeItemRow,
+          onItemAdded: onItemAdded,
         ),
       NodeItemText() => _Text(
           item: item as NodeItemText,
@@ -35,10 +41,12 @@ class ItemPreview extends StatelessWidget {
 
 class _Container extends StatelessWidget {
   final NodeItemContainer item;
+  final Function(String parentId, NodePaletteItem item)? onItemAdded;
 
   const _Container({
     super.key,
     required this.item,
+    this.onItemAdded,
   });
 
   @override
@@ -49,9 +57,12 @@ class _Container extends StatelessWidget {
         border: Border.all(color: context.pathfinderTheme.colors.textColor),
         color: context.pathfinderTheme.colors.backgroundColor,
       ),
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
-      child: item.child?.let((it) => ItemPreview(item: it)) ??
+      child: item.child?.let(
+            (it) => ItemPreview(
+              item: it,
+              onItemAdded: onItemAdded,
+            ),
+          ) ??
           SizedBox(
             width: 200,
             height: 200,
@@ -64,10 +75,7 @@ class _Container extends StatelessWidget {
               onWillAccept: (Object? candidate) => candidate is NodePaletteItem,
               onAccept: (Object? candidate) {
                 final descendant = candidate as NodePaletteItem;
-                context.read<NewNodeTemplateCubit>().addItem(
-                      item.id,
-                      descendant,
-                    );
+                onItemAdded?.call(item.id, descendant);
               },
             ),
           ),
@@ -77,10 +85,12 @@ class _Container extends StatelessWidget {
 
 class _Column extends StatelessWidget {
   final NodeItemColumn item;
+  final Function(String parentId, NodePaletteItem item)? onItemAdded;
 
   const _Column({
     super.key,
     required this.item,
+    this.onItemAdded,
   });
 
   @override
@@ -91,14 +101,16 @@ class _Column extends StatelessWidget {
         border: Border.all(color: context.pathfinderTheme.colors.textColor),
         color: context.pathfinderTheme.colors.backgroundColor,
       ),
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final child in item.children) ItemPreview(item: child),
+          for (final child in item.children)
+            ItemPreview(
+              item: child,
+              onItemAdded: onItemAdded,
+            ),
           SizedBox(
-            width: 200,
+            width: 50,
             height: 100,
             child: DragTarget(
               builder: (context, candidateItems, rejectedItems) {
@@ -109,10 +121,7 @@ class _Column extends StatelessWidget {
               onWillAccept: (Object? candidate) => candidate is NodePaletteItem,
               onAccept: (Object? candidate) {
                 final descendant = candidate as NodePaletteItem;
-                context.read<NewNodeTemplateCubit>().addItem(
-                      item.id,
-                      descendant,
-                    );
+                onItemAdded?.call(item.id, descendant);
               },
             ),
           ),
@@ -124,10 +133,12 @@ class _Column extends StatelessWidget {
 
 class _Row extends StatelessWidget {
   final NodeItemRow item;
+  final Function(String parentId, NodePaletteItem item)? onItemAdded;
 
   const _Row({
     super.key,
     required this.item,
+    this.onItemAdded,
   });
 
   @override
@@ -138,14 +149,16 @@ class _Row extends StatelessWidget {
         border: Border.all(color: context.pathfinderTheme.colors.textColor),
         color: context.pathfinderTheme.colors.backgroundColor,
       ),
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final child in item.children) ItemPreview(item: child),
+          for (final child in item.children)
+            ItemPreview(
+              item: child,
+              onItemAdded: onItemAdded,
+            ),
           SizedBox(
-            width: 100,
+            width: 50,
             height: 200,
             child: DragTarget(
               builder: (context, candidateItems, rejectedItems) {
@@ -156,10 +169,7 @@ class _Row extends StatelessWidget {
               onWillAccept: (Object? candidate) => candidate is NodePaletteItem,
               onAccept: (Object? candidate) {
                 final descendant = candidate as NodePaletteItem;
-                context.read<NewNodeTemplateCubit>().addItem(
-                      item.id,
-                      descendant,
-                    );
+                onItemAdded?.call(item.id, descendant);
               },
             ),
           ),
