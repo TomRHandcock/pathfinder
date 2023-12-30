@@ -110,8 +110,8 @@ class _Column extends StatelessWidget {
               onItemAdded: onItemAdded,
             ),
           SizedBox(
-            width: 50,
-            height: 100,
+            width: 100,
+            height: item.children.isEmpty ? 100 : 20,
             child: DragTarget(
               builder: (context, candidateItems, rejectedItems) {
                 return (candidateItems.isNotEmpty)
@@ -158,8 +158,8 @@ class _Row extends StatelessWidget {
               onItemAdded: onItemAdded,
             ),
           SizedBox(
-            width: 50,
-            height: 200,
+            width: item.children.isEmpty ? 100 : 20,
+            height: 100,
             child: DragTarget(
               builder: (context, candidateItems, rejectedItems) {
                 return (candidateItems.isNotEmpty)

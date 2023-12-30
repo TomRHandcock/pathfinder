@@ -11,6 +11,7 @@ import 'package:pathfinder/ui/screens/editor/new_node_template/widgets/item_prev
 import 'package:pathfinder/ui/util/context_utils.dart';
 import 'package:pathfinder/ui/widgets/buttons/pathinder_filled_button.dart';
 import 'package:pathfinder/ui/widgets/input/pathfinder_text_field.dart';
+import 'package:pathfinder/ui/widgets/theming/models.dart';
 
 part 'widgets/item_palette.dart';
 
