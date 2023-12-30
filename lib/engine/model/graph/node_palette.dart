@@ -19,7 +19,7 @@ enum NodePaletteItem {
     NodePaletteItem.container => NodeItem.container(id: id),
     NodePaletteItem.row => NodeItem.row(id: id, children: []),
     NodePaletteItem.column => NodeItem.column(id: id, children: []),
-    NodePaletteItem.text => NodeItem.text(id: id, fontSize: 16, inputKey: id),
-    NodePaletteItem.image => NodeItem.image(id: id, inputKey: id),
+    NodePaletteItem.text => NodeItem.text(id: id, fontSize: 16, inputKey: "text-$id"),
+    NodePaletteItem.image => NodeItem.image(id: id, inputKey: "text-$id"),
   };
 }

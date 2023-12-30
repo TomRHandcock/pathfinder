@@ -40,4 +40,13 @@ class NewNodeTemplateCubit extends Cubit<NewNodeTemplateState> {
     final newId = "${existingIds.length}";
     return item.toNodeItem(newId);
   }
+
+  removeItem(String id) {
+    final currentTree = state.values.template.item;
+    emit(
+      state.copyWith.values.template(
+        item: currentTree.removeDescendant(id),
+      ),
+    );
+  }
 }
