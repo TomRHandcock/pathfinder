@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pathfinder/engine/util/object_utils.dart';
+import 'package:pathfinder/engine/util/iterable_utils.dart';
 
 part 'node_template.freezed.dart';
 
@@ -39,6 +41,26 @@ sealed class NodeItem with _$NodeItem {
     required String id,
     required String inputKey,
   }) = NodeItemImage;
+
+  String get name => switch (this) {
+        NodeItemContainer() => "Container",
+        NodeItemRow() => "Row",
+        NodeItemColumn() => "Column",
+        NodeItemText() => "Text",
+        NodeItemImage() => "Image",
+      };
+
+  List<(NodeItem, int)> getFlatChildren([int depth = 0]) =>
+      [(this, depth)] +
+      switch (this) {
+        NodeItemContainer(:final child) => [if (child != null) child],
+        NodeItemColumn(:final children) ||
+        NodeItemRow(:final children) =>
+          children,
+        _ => <NodeItem>[],
+      }
+          .map((item) => item.getFlatChildren(depth + 1))
+          .flatten();
 
   List<String> get ids => switch (this) {
         NodeItemContainer(:final id, :final child) => [id] + (child?.ids ?? []),
