@@ -26,6 +26,10 @@ class NewNodeTemplateScreen extends StatelessWidget
     context.read<NewNodeTemplateCubit>().addItem(parentId, item);
   }
 
+  _onItemRemoved(BuildContext context, String id) {
+    context.read<NewNodeTemplateCubit>().removeItem(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewNodeTemplateCubit, NewNodeTemplateState>(
@@ -33,6 +37,7 @@ class NewNodeTemplateScreen extends StatelessWidget
           NewNodeTemplateContent(
         onItemAdded: (String parentId, NodePaletteItem item) =>
             _onItemAdded(context, parentId, item),
+        onItemRemoved: (String id) => _onItemRemoved(context, id),
         state: state,
       ),
     );
@@ -47,11 +52,13 @@ class NewNodeTemplateScreen extends StatelessWidget
 
 class NewNodeTemplateContent extends StatelessWidget {
   final Function(String parentId, NodePaletteItem item)? onItemAdded;
+  final Function(String id)? onItemRemoved;
   final NewNodeTemplateState state;
 
   const NewNodeTemplateContent({
     required this.state,
     this.onItemAdded,
+    this.onItemRemoved,
     super.key,
   });
 
@@ -76,7 +83,10 @@ class NewNodeTemplateContent extends StatelessWidget {
             ),
           ),
         ),
-        NewNodeTemplatePropertiesPane(template: state.values.template),
+        NewNodeTemplatePropertiesPane(
+          template: state.values.template,
+          onItemDeleted: (id) => onItemRemoved?.call(id),
+        ),
       ],
     );
   }

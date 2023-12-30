@@ -2,10 +2,12 @@ part of '../new_node_template_screen.dart';
 
 class NewNodeTemplatePropertiesPane extends StatefulWidget {
   final NodeTemplate template;
+  final Function(String id)? onItemDeleted;
 
   const NewNodeTemplatePropertiesPane({
     super.key,
     required this.template,
+    this.onItemDeleted,
   });
 
   @override
@@ -40,7 +42,11 @@ class _NewNodeTemplatePropertiesPaneState
           PathfinderTextField(
             controller: _nameController,
           ),
-          Expanded(child: _LayersPane(template: widget.template)),
+          Expanded(
+              child: _LayersPane(
+            template: widget.template,
+            onDeletePressed: (id) => widget.onItemDeleted?.call(id),
+          )),
           const PathfinderFilledButton(label: "Create")
         ],
       ),
@@ -50,9 +56,11 @@ class _NewNodeTemplatePropertiesPaneState
 
 class _LayersPane extends StatelessWidget {
   final NodeTemplate template;
+  final Function(String id)? onDeletePressed;
 
   const _LayersPane({
     required this.template,
+    this.onDeletePressed,
   });
 
   @override
@@ -60,10 +68,14 @@ class _LayersPane extends StatelessWidget {
     final items = template.item.getFlatChildren();
     return ListView.separated(
       shrinkWrap: true,
-      itemBuilder: (_, int index) => _LayerItem(
-        item: items[index].$1,
-        depth: items[index].$2,
-      ),
+      itemBuilder: (_, int index) {
+        final item = items[index];
+        return _LayerItem(
+          item: item.$1,
+          depth: item.$2,
+          onDeletePressed: () => onDeletePressed?.call(item.$1.id),
+        );
+      },
       separatorBuilder: (_, __) => const SizedBox.square(
         dimension: 4,
       ),
@@ -75,12 +87,12 @@ class _LayersPane extends StatelessWidget {
 class _LayerItem extends StatelessWidget {
   final int depth;
   final NodeItem item;
-  final Function()? onClosePressed;
+  final Function()? onDeletePressed;
 
   const _LayerItem({
     required this.item,
     required this.depth,
-    this.onClosePressed,
+    this.onDeletePressed,
   });
 
   @override
@@ -96,7 +108,7 @@ class _LayerItem extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () => onClosePressed?.call(),
+          onPressed: () => onDeletePressed?.call(),
           icon: const Icon(Icons.delete),
         )
       ],
