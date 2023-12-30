@@ -31,5 +31,13 @@ void main() {
       // Verify
       expect(result, nodeTemplateWithNewItem.item);
     });
+
+    test("removeDescendant - returns node item with item subtracted", (){
+      // Run test
+      final result = nodeTemplate.item.removeDescendant("2");
+
+      // Verify
+      expect(result, nodeTemplateWithOutItem.item);
+    });
   });
 }

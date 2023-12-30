@@ -27,6 +27,17 @@ const nodeTemplateWithNewItem = NodeTemplate(
   ),
 );
 
+const nodeTemplateWithOutItem = NodeTemplate(
+  name: "My template",
+  item: NodeItem.column(
+    id: "0",
+    children: [
+      NodeItem.text(id: "1", fontSize: 12.0, inputKey: "text-1"),
+      NodeItem.container(id: "3"),
+    ],
+  ),
+);
+
 final flatNodeTemplate = [
   (nodeTemplate.item, 0),
   const (NodeItem.text(id: "1", fontSize: 12.0, inputKey: "text-1"), 1),

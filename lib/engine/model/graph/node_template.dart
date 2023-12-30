@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pathfinder/engine/util/nullable_utils.dart';
 import 'package:pathfinder/engine/util/object_utils.dart';
 import 'package:pathfinder/engine/util/iterable_utils.dart';
 
@@ -124,5 +125,43 @@ sealed class NodeItem with _$NodeItem {
             child: child ?? newChild,
           ),
         _ => throw StateError("Can't add child to node with ID: $id}"),
+      };
+
+  NodeItem removeDescendant(String id) {
+    final directChildren = switch(this) {
+      NodeItemContainer(:final child) => [child],
+      NodeItemColumn(:final children) => children,
+      NodeItemRow(:final children) => children,
+      _ => []
+    };
+    final directChildrenIds = directChildren.map((child) => child.id).toList();
+    if(directChildrenIds.contains(id)) {
+      return removeChild(id);
+    }
+    return switch(this) {
+      NodeItemContainer(:final child) => (this as NodeItemContainer).copyWith(
+        child: child?.removeDescendant(id)
+      ),
+      NodeItemRow(:final children) => (this as NodeItemRow).copyWith(
+        children: children.map((child) => child.removeDescendant(id)).toList()
+      ),
+      NodeItemColumn(:final children) => (this as NodeItemColumn).copyWith(
+          children: children.map((child) => child.removeDescendant(id)).toList()
+      ),
+      _ => this,
+    };
+  }
+
+  NodeItem removeChild(String id) => switch (this) {
+        NodeItemRow(:final children) => (this as NodeItemRow).copyWith(
+            children: children.where((child) => child.id != id).toList()),
+        NodeItemColumn(:final children) => (this as NodeItemColumn).copyWith(
+            children: children.where((child) => child.id != id).toList(),
+          ),
+        NodeItemContainer(:final child) => (this as NodeItemContainer).copyWith(
+            child: null,
+          ),
+        _ => throw StateError(
+            "Node with ID: ${this.id} does not contain children"),
       };
 }
