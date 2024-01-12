@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pathfinder/engine/model/graph/node_template.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
 
 class NodePalette extends StatelessWidget {
   final Function()? onNewNodeTemplatePressed;
+  final List<NodeTemplate> templates;
 
   const NodePalette({
     super.key,
+    required this.templates,
     this.onNewNodeTemplatePressed,
   });
 
@@ -19,6 +22,11 @@ class NodePalette extends StatelessWidget {
           _NewNodeButton(
             onPressed: () => onNewNodeTemplatePressed?.call(),
           ),
+          Text(
+            "Template count: ${templates.length}",
+            style: context.pathfinderTheme.text.bodyLarge,
+            textAlign: TextAlign.center,
+          )
         ],
       ),
     );

@@ -3,11 +3,13 @@ part of '../new_node_template_screen.dart';
 class NewNodeTemplatePropertiesPane extends StatefulWidget {
   final NodeTemplate template;
   final Function(String id)? onItemDeleted;
+  final Function()? onCreate;
 
   const NewNodeTemplatePropertiesPane({
     super.key,
     required this.template,
     this.onItemDeleted,
+    this.onCreate,
   });
 
   @override
@@ -47,7 +49,10 @@ class _NewNodeTemplatePropertiesPaneState
             template: widget.template,
             onDeletePressed: (id) => widget.onItemDeleted?.call(id),
           )),
-          const PathfinderFilledButton(label: "Create")
+          PathfinderFilledButton(
+            label: "Create",
+            onPressed: widget.onCreate,
+          )
         ],
       ),
     );
