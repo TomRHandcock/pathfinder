@@ -4,7 +4,6 @@ import 'package:pathfinder/ui/widgets/router/main_router.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
-
   const HomeScreen({super.key});
 
   @override

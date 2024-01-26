@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pathfinder/engine/model/graph/edge.dart';
 import 'package:pathfinder/engine/model/graph/node.dart';
 import 'package:pathfinder/engine/util/list_utils.dart';
-import 'package:pathfinder/ui/screens/editor/widgets/editor_canvas.dart';
 import 'package:vector_math/vector_math.dart' as vector;
+
+import 'editor_canvas.dart';
 
 class SizedNode {
   final Node node;
@@ -53,19 +54,21 @@ class EdgeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final localStart = startNode;
     final localEnd = endNode;
-    if(localStart == null) {
+    if (localStart == null) {
       throw StateError("Couldn't find node with ID: ${edge.startNode}");
     }
-    if(localEnd == null) {
+    if (localEnd == null) {
       throw StateError("Couldn't find node with ID: ${edge.endNode}");
     }
     final startTangent = getPerimeterPosition(localStart, edge.startSide);
     final endTangent = getPerimeterPosition(localEnd, edge.endSide);
-    if(startTangent == null) {
-      throw StateError("Couldn't find tangent at point ${edge.startSide} on node with ID: ${edge.startNode}");
+    if (startTangent == null) {
+      throw StateError(
+          "Couldn't find tangent at point ${edge.startSide} on node with ID: ${edge.startNode}");
     }
-    if(endTangent == null) {
-      throw StateError("Couldn't find tangent at point ${edge.endSide} on node with ID: ${edge.endNode}");
+    if (endTangent == null) {
+      throw StateError(
+          "Couldn't find tangent at point ${edge.endSide} on node with ID: ${edge.endNode}");
     }
     return CustomPaint(
       painter: _EdgePainter(startTangent, endTangent),
@@ -80,7 +83,7 @@ class _EdgePainter extends CustomPainter {
   _EdgePainter(this.startTangent, this.endTangent);
 
   static final linePaint = Paint()
-    ..color = Colors.blueGrey
+    ..color = Colors.white
     ..strokeWidth = 2
     ..style = PaintingStyle.stroke;
 
