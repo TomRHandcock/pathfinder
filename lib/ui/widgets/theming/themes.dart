@@ -12,7 +12,6 @@ abstract class Themes {
 
   static final defaultInput = PathfinderInput(
     textfield: InputDecoration(
-
       border: UnderlineInputBorder(
         borderSide: BorderSide(
           color: defaultColors.textColor,

@@ -15,7 +15,8 @@ class EditorCanvas extends StatefulWidget {
   final Graph graph;
   final GraphController controller;
 
-  const EditorCanvas({required this.graph, required this.controller, super.key});
+  const EditorCanvas(
+      {required this.graph, required this.controller, super.key});
 
   @override
   State<EditorCanvas> createState() => _EditorCanvasState();
@@ -48,10 +49,12 @@ class _EditorCanvasState extends State<EditorCanvas> {
           widget.graph.edges.map((edge) {
             return LayoutId(
               id: "edge-${edge.id}",
-              child: widget.controller.nodeSizes.isNotEmpty ? EdgeWidget(
-                edge: edge,
-                controller: widget.controller,
-              ) : Container(),
+              child: widget.controller.nodeSizes.isNotEmpty
+                  ? EdgeWidget(
+                      edge: edge,
+                      controller: widget.controller,
+                    )
+                  : Container(),
             );
           }).toList(),
     );

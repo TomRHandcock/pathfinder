@@ -54,19 +54,21 @@ class EdgeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final localStart = startNode;
     final localEnd = endNode;
-    if(localStart == null) {
+    if (localStart == null) {
       throw StateError("Couldn't find node with ID: ${edge.startNode}");
     }
-    if(localEnd == null) {
+    if (localEnd == null) {
       throw StateError("Couldn't find node with ID: ${edge.endNode}");
     }
     final startTangent = getPerimeterPosition(localStart, edge.startSide);
     final endTangent = getPerimeterPosition(localEnd, edge.endSide);
-    if(startTangent == null) {
-      throw StateError("Couldn't find tangent at point ${edge.startSide} on node with ID: ${edge.startNode}");
+    if (startTangent == null) {
+      throw StateError(
+          "Couldn't find tangent at point ${edge.startSide} on node with ID: ${edge.startNode}");
     }
-    if(endTangent == null) {
-      throw StateError("Couldn't find tangent at point ${edge.endSide} on node with ID: ${edge.endNode}");
+    if (endTangent == null) {
+      throw StateError(
+          "Couldn't find tangent at point ${edge.endSide} on node with ID: ${edge.endNode}");
     }
     return CustomPaint(
       painter: _EdgePainter(startTangent, endTangent),

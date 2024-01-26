@@ -128,26 +128,25 @@ sealed class NodeItem with _$NodeItem {
       };
 
   NodeItem removeDescendant(String id) {
-    final directChildren = switch(this) {
+    final directChildren = switch (this) {
       NodeItemContainer(:final child) => [child],
       NodeItemColumn(:final children) => children,
       NodeItemRow(:final children) => children,
       _ => []
     };
     final directChildrenIds = directChildren.map((child) => child.id).toList();
-    if(directChildrenIds.contains(id)) {
+    if (directChildrenIds.contains(id)) {
       return removeChild(id);
     }
-    return switch(this) {
-      NodeItemContainer(:final child) => (this as NodeItemContainer).copyWith(
-        child: child?.removeDescendant(id)
-      ),
+    return switch (this) {
+      NodeItemContainer(:final child) => (this as NodeItemContainer)
+          .copyWith(child: child?.removeDescendant(id)),
       NodeItemRow(:final children) => (this as NodeItemRow).copyWith(
-        children: children.map((child) => child.removeDescendant(id)).toList()
-      ),
+          children:
+              children.map((child) => child.removeDescendant(id)).toList()),
       NodeItemColumn(:final children) => (this as NodeItemColumn).copyWith(
-          children: children.map((child) => child.removeDescendant(id)).toList()
-      ),
+          children:
+              children.map((child) => child.removeDescendant(id)).toList()),
       _ => this,
     };
   }

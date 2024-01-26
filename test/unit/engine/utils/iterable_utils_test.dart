@@ -6,7 +6,12 @@ void main() {
     test("flatten - returns expected result", () {
       // Setup
       const inputToExpected = {
-        [[1, 2], [3], [4], []]: [1, 2, 3, 4]
+        [
+          [1, 2],
+          [3],
+          [4],
+          []
+        ]: [1, 2, 3, 4]
       };
 
       // Run test & verify

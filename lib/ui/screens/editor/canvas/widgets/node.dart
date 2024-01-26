@@ -11,8 +11,7 @@ class NodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
+    return Wrap(children: [
       Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -21,7 +20,6 @@ class NodeWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Text("Node ${node.id}: ${node.id}"),
       ),
-    ]
-    );
+    ]);
   }
 }
