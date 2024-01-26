@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pathfinder/engine/model/graph/node_template.dart';
+import 'package:pathfinder/ui/screens/editor/widgets/palette_item_preview.dart';
 import 'package:pathfinder/ui/util/context_utils.dart';
 
 class NodePalette extends StatelessWidget {
@@ -17,17 +18,16 @@ class NodePalette extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: context.pathfinderTheme.colors.backgroundColor,
-      child: ListView(
-        children: [
-          _NewNodeButton(
+      child: ListView.separated(
+        itemCount: templates.length + 1,
+        itemBuilder: (_, index) => switch(index) {
+          0 => _NewNodeButton(
             onPressed: () => onNewNodeTemplatePressed?.call(),
           ),
-          Text(
-            "Template count: ${templates.length}",
-            style: context.pathfinderTheme.text.bodyLarge,
-            textAlign: TextAlign.center,
-          )
-        ],
+          _ => PaletteItemPreview(template: templates[index - 1],),
+        },
+        padding: const EdgeInsets.all(8),
+        separatorBuilder: (_, __) => const SizedBox(height: 8),
       ),
     );
   }
