@@ -2,12 +2,14 @@ part of '../new_node_template_screen.dart';
 
 class NewNodeTemplatePropertiesPane extends StatefulWidget {
   final NodeTemplate template;
+  final Function(String name)? onNameUpdated;
   final Function(String id)? onItemDeleted;
   final Function()? onCreate;
 
   const NewNodeTemplatePropertiesPane({
     super.key,
     required this.template,
+    this.onNameUpdated,
     this.onItemDeleted,
     this.onCreate,
   });
@@ -43,6 +45,7 @@ class _NewNodeTemplatePropertiesPaneState
         children: [
           PathfinderTextField(
             controller: _nameController,
+            onChanged: widget.onNameUpdated,
           ),
           Expanded(
               child: _LayersPane(

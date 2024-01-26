@@ -22,6 +22,10 @@ class NewNodeTemplateScreen extends StatelessWidget
     implements AutoRouteWrapper {
   const NewNodeTemplateScreen({super.key});
 
+  _onNameUpdated(BuildContext context, String name) {
+    context.read<NewNodeTemplateCubit>().updateName(name);
+  }
+
   _onItemAdded(BuildContext context, String parentId, NodePaletteItem item) {
     context.read<NewNodeTemplateCubit>().addItem(parentId, item);
   }
@@ -40,6 +44,7 @@ class NewNodeTemplateScreen extends StatelessWidget
     return BlocBuilder<NewNodeTemplateCubit, NewNodeTemplateState>(
       builder: (BuildContext context, NewNodeTemplateState state) =>
           NewNodeTemplateContent(
+        onNameUpdated: (String name) => _onNameUpdated(context, name),
         onItemAdded: (String parentId, NodePaletteItem item) =>
             _onItemAdded(context, parentId, item),
         onItemRemoved: (String id) => _onItemRemoved(context, id),
@@ -57,6 +62,7 @@ class NewNodeTemplateScreen extends StatelessWidget
 }
 
 class NewNodeTemplateContent extends StatelessWidget {
+  final Function(String name)? onNameUpdated;
   final Function(String parentId, NodePaletteItem item)? onItemAdded;
   final Function(String id)? onItemRemoved;
   final Function()? onCreate;
@@ -64,6 +70,7 @@ class NewNodeTemplateContent extends StatelessWidget {
 
   const NewNodeTemplateContent({
     required this.state,
+    this.onNameUpdated,
     this.onItemAdded,
     this.onItemRemoved,
     this.onCreate,
@@ -93,6 +100,7 @@ class NewNodeTemplateContent extends StatelessWidget {
         ),
         NewNodeTemplatePropertiesPane(
           template: state.values.template,
+          onNameUpdated: onNameUpdated,
           onItemDeleted: (id) => onItemRemoved?.call(id),
           onCreate: onCreate,
         ),
