@@ -10,8 +10,7 @@ class Node with _$Node {
   const factory Node({
     required int id,
     required Offset position,
-    required Color background,
-    required Map<String, String> values,
+    required Map<String, dynamic> inputs,
     required NodeTemplate template,
   }) = _Node;
 }
