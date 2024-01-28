@@ -22,35 +22,40 @@ class _PaletteItemPreviewState extends State<PaletteItemPreview> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: context.pathfinderTheme.colors.rippleColor
-              .withOpacity(0.1)
-              .takeIf(isHovered),
-        ),
-        padding: const EdgeInsets.all(4),
-        child: MouseRegion(
-          onEnter: (_) => setState(() {
-            isHovered = true;
-          }),
-          onExit: (_) => setState(() {
-            isHovered = false;
-          }),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                widget.template.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.pathfinderTheme.text.bodyLarge,
-                textAlign: TextAlign.center,
-              ),
-            ],
+      child: Draggable(
+        data: widget.template,
+        feedback: Container(),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: context.pathfinderTheme.colors.rippleColor
+                .withOpacity(0.1)
+                .takeIf(isHovered),
+          ),
+          padding: const EdgeInsets.all(4),
+          child: MouseRegion(
+            onEnter: (_) => setState(() {
+              isHovered = true;
+            }),
+            onExit: (_) => setState(() {
+              isHovered = false;
+            }),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  widget.template.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.pathfinderTheme.text.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
